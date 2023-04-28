@@ -25,26 +25,31 @@ export default function Home() {
       <SearchTop />
 
       {/* body */}
-      <ScrollView>
+      <ScrollView
+        className="bg-gray-100"
+        contentContainerStyle={{
+          paddingBottom: 112,
+        }}
+      >
 
         <Categories />
 
         <FeaturedRow
           id={123}
           title="Featured"
-          description=""
+          description="Paid placements from our partners"
         />
 
         <FeaturedRow
           id={123}
           title="Tasty Discounts"
-          description=""
+          description="Everyone's been enjoying these juicy discounts!"
         />
 
         <FeaturedRow
           id={123}
           title="Offers near you!"
-          description=""
+          description="Why not support your local restaurant tonight!"
         />
 
       </ScrollView>
