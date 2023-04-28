@@ -37,8 +37,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
+    "standart": "^6.1.0",
     "tailwindcss": "^3.3.1",
     "typescript": "^4.9.4"
   },
-  "private": true
+  "private": true, 
+  "eslintConfig": {
+    "extends": "./node_modules/standart/eslintrc.json"
+  }
 }
