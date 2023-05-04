@@ -6,15 +6,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchTop from '../components/SearchTop';
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
+import Restaurant from '../Query/Restaurants';
 
 export default function Home() {
   const navigation = useNavigation()
+  const {categoriasF} = Restaurant()
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     })
   }, [])
+  
+  console.log(categoriasF)
 
   return (
     <SafeAreaView className="bg-white pt-2">
