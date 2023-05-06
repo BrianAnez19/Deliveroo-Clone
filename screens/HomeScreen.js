@@ -10,15 +10,13 @@ import Restaurant from '../Query/Restaurants';
 
 export default function Home() {
   const navigation = useNavigation()
-  const {categoriasF} = Restaurant()
+  const { categoriasF } = Restaurant()
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     })
   }, [])
-  
-  console.log(categoriasF)
 
   return (
     <SafeAreaView className="bg-white pt-2">
@@ -38,24 +36,14 @@ export default function Home() {
 
         <Categories />
 
-        <FeaturedRow
-          id={123}
-          title="Featured"
-          description="Paid placements from our partners"
-        />
-
-        <FeaturedRow
-          id={123}
-          title="Tasty Discounts"
-          description="Everyone's been enjoying these juicy discounts!"
-        />
-
-        <FeaturedRow
-          id={123}
-          title="Offers near you!"
-          description="Why not support your local restaurant tonight!"
-        />
-
+        {categoriasF?.map((category)=>(
+          <FeaturedRow
+          key={category._id}
+          id={category._id}
+          title={category.name}
+          description={category.short_description}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   )
