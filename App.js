@@ -3,23 +3,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import { StatusBar } from 'expo-status-bar';
-import {Platform} from 'react-native'; 
+import { Platform } from 'react-native';
+import RestaurantScreen from './screens/RestaurantScreen';
 
-if ((Platform.OS === 'ios') || (Platform.OS === 'android')){
-  require('react-native-url-polyfill/auto'); 
-}  else {
-  require('react-native-url-polyfill/index'); 
+if ((Platform.OS === 'ios') || (Platform.OS === 'android')) {
+  require('react-native-url-polyfill/auto');
+} else {
+  require('react-native-url-polyfill/index');
 }
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  
+
   return (
     <NavigationContainer>
       <TailwindProvider>
         <Stack.Navigator>
           <Stack.Screen name="Inicio" component={HomeScreen} />
+          <Stack.Screen name="Restaurante" component={RestaurantScreen} />
         </Stack.Navigator>
       </TailwindProvider>
       <StatusBar style="auto" />

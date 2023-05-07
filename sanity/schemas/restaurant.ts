@@ -33,6 +33,11 @@ export default defineType({
       type: 'number',
     }),
     defineField({
+      name: 'address',
+      title: 'Restaurant address',
+      type: 'string',
+    }),
+    defineField({
       name: 'rating',
       title: 'Enter a Rating from (1-5 Stars)',
       type: 'number',

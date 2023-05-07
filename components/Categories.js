@@ -1,8 +1,12 @@
 import { ScrollView } from 'react-native'
 import React from 'react'
 import CategoryCard from './CategoryCard'
+import { CategoriesG } from '../Query'
+import { urlFor } from '../sanity'
 
 export default function Categories() {
+    const { categoriesG } = CategoriesG()
+
     return (
         <ScrollView
             contentContainerStyle={{
@@ -12,28 +16,12 @@ export default function Categories() {
             horizontal
             showsHorizontalScrollIndicator={false}
         >
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-                
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
-            <CategoryCard ImgUrl="https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1"
-                Title="testeo pal perreo" />
-
+            {categoriesG?.map((category) => (
+                <CategoryCard
+                    key={category._id}
+                    ImgUrl={urlFor(category.image).url()}
+                    Title={category.name} />
+            ))}
         </ScrollView>
     )
 }

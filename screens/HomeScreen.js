@@ -6,11 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchTop from '../components/SearchTop';
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
-import Restaurant from '../Query/Restaurants';
+import FeaturedGen from '../Query/index';
 
 export default function Home() {
   const navigation = useNavigation()
-  const { categoriasF } = Restaurant()
+  const { featuredG } = FeaturedGen()
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -36,12 +36,12 @@ export default function Home() {
 
         <Categories />
 
-        {categoriasF?.map((category)=>(
+        {featuredG?.map((category) => (
           <FeaturedRow
-          key={category._id}
-          id={category._id}
-          title={category.name}
-          description={category.short_description}
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
           />
         ))}
       </ScrollView>
