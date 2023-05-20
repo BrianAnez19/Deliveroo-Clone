@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { urlFor } from '../sanity';
 import { ArrowLeftIcon, ChevronRightIcon, MapPinIcon, QuestionMarkCircleIcon, StarIcon } from 'react-native-heroicons/outline'
 import DishRow from '../components/DishRow';
+import BasketIcon from '../components/BasketIcon';
 
 
 export default function RestaurantScreen() {
@@ -23,6 +24,7 @@ export default function RestaurantScreen() {
 
   return (
     <SafeAreaView>
+      <BasketIcon />
       <ScrollView>
         <View>
           <Image source={{ uri: urlFor(ImgUrl).url(), }}
@@ -69,7 +71,7 @@ export default function RestaurantScreen() {
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View className='pb-32'>
           <Text className='px-4 pt-2 mb-2 font-bold text-xl'>
             Menu
           </Text>

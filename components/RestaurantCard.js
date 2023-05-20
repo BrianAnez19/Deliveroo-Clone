@@ -8,7 +8,7 @@ export default function RestaurantCard({ id, ImgUrl, title, rating, genre,
     address, short_description, dishes, long, lat }) {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity className="ng-white mr-3 shadow"
+        <TouchableOpacity className="ng-white mr-3 bg-slate-50 shadow"
             onPress={() => {
                 navigation.navigate('Restaurante', {
                     id, ImgUrl, title, rating, genre,
