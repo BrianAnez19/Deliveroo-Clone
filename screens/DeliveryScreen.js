@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { XCircleIcon } from 'react-native-heroicons/outline'
 import * as Progress from 'react-native-progress'
 import * as Animatable from 'react-native-animatable'
+import MapView, { Marker } from 'react-native-maps'
 
 export default function DeliveryScreen() {
     const navigation = useNavigation()
@@ -48,7 +49,56 @@ export default function DeliveryScreen() {
                     </View>
 
                     <Progress.Bar size={30} color='#00CCBB' indeterminate={true} />
+
+                    <Text className='mt-3 text-gray-500'>
+                        Your order at {restaurant.title} is being prepared
+                    </Text>
                 </View>
+            </SafeAreaView>
+
+            <MapView initialRegion={{
+                latitude: restaurant.lat,
+                longitude: restaurant.long,
+                latitudeDelta: 0.005,
+                longitudeDelta: 0.005,
+            }}
+                className='flex-1 -mt-10 z-0'
+                mapType='mutedStandard'
+            >
+
+                <Marker coordinate={{
+                    latitude: restaurant.lat,
+                    longitude: restaurant.long,
+                }}
+                    title={restaurant.title}
+                    description={restaurant.short_description}
+                    identifier='origin'
+                    pinColor='#00CCBB'
+                />
+
+            </MapView>
+
+            <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28'>
+                <Image
+                    source={{
+                        uri: 'https://burst.shopifycdn.com/photos/cozy-reading-in-bed.jpg?width=373&format=pjpg&exif=1&iptc=1',
+                    }}
+                    className='h-14 w-14 bg-gray-300 p-4 rounded-full ml-5'
+                />
+
+                <View className='flex-1'>
+                    <Text className='text-lg'>
+                        Sonny Sangha
+                    </Text>
+
+                    <Text className='text-gray-400'>
+                        Your Rider
+                    </Text>
+                </View>
+
+                    <Text className='text-[#00CCBB] text-lg mr-5 font-bold'>
+                        Call
+                    </Text>
             </SafeAreaView>
         </View>
     )
