@@ -3,13 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectRestaurant } from '../contexts/restaurantSlice'
-import { selectBasketItems } from '../contexts/basketSlice'
+import { removeToBasket, selectBasketItems, selectBasketTotal } from '../contexts/basketSlice'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { XCircleIcon } from 'react-native-heroicons/outline'
+import { urlFor } from '../sanity'
 
 export default function BasketScreen() {
   const [groupItemInBasket, setGroupItemInBasket] = useState([])
   const navigation = useNavigation()
+  const basketTotal = useSelector(selectBasketTotal)
   const restaurant = useSelector(selectRestaurant)
   const items = useSelector(selectBasketItems)
   const dispatch = useDispatch()
@@ -55,19 +57,83 @@ export default function BasketScreen() {
             Deliver in 50-75 min
           </Text>
           <TouchableOpacity>
-              <Text className='text-[#00CCBB]'>
-                Change
-              </Text>
+            <Text className='text-[#00CCBB]'>
+              Change
+            </Text>
           </TouchableOpacity>
         </View>
 
-        <ScrollView>
-            {Object.entries(groupItemInBasket).map(([key, items]) => (
-              <View key={key}>
-                <Text>{items.length}</Text>
-              </View>
-            ))}
+        <ScrollView
+          className='divide-y divide-gray-200'>
+          {Object.entries(groupItemInBasket).map(([key, items]) => (
+            <View key={key}
+              className='flex-row items-center space-x-3 bg-white py-2 px-5'>
+
+              <Text className='text-[#00CCBB]'>{items.length} x</Text>
+
+              <Image source={{
+                uri: urlFor(items[0]?.image).url()
+              }}
+                className='h-12 w-12 rounded-full'
+              />
+
+              <Text className='flex-1'>{items[0]?.name}</Text>
+
+              <Text className='text-gray-600'>
+                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(items[0]?.price)}
+              </Text>
+
+              <TouchableOpacity>
+                <Text
+                  className='text-[#00CCBB] text-xs'
+                  onPress={() => dispatch(removeToBasket({ id: key }))}>
+                  Remove
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         </ScrollView>
+
+        <View className='p-5 bg-white mt-5 space-y-4'>
+          <View className='flex-row justify-between'>
+            <Text className='text-gray-600'>
+              Subtotal
+            </Text>
+
+            <Text className='text-gray-600'>
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(basketTotal)}
+            </Text>
+          </View>
+
+
+          <View className='flex-row justify-between'>
+            <Text className='text-gray-600'>
+              Delivery Fee
+            </Text>
+
+            <Text className='text-gray-600'>
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(5.99)}
+            </Text>
+          </View>
+
+          <View className='flex-row justify-between'>
+            <Text>
+              Order Total
+            </Text>
+
+            <Text className='text-gray-600'>
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(basketTotal + 5.99)}
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('PreparingOrderScreen')}
+            className='rounded-lg bg-[#00CCBB] p-4'>
+            <Text className='text-center text-lg text-white font-bold'>
+              Place Order
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
