@@ -4,4 +4,4 @@ Proyecto realizado en React Native, elaborado para su completa funcionalidad tan
 Se usaron las tecnologia de React Native, Tailwind CSS y Sanity 
 
 Para iniciarlo, se coloca en consola:
-# npx expo start
+'# npx expo start'
